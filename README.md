@@ -1,2 +1,2 @@
-# grocery-guy
+# Grocery-guy
 grocery list electron app 
