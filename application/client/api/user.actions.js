@@ -1,0 +1,58 @@
+var request = require('request');
+var api_config = require('./config/api.config');
+
+
+let userLoginForm = document.getElementById("userLoginForm");
+userLoginForm.addEventListener('submit', function(event) {
+	event.preventDefault();
+	const formData = new FormData(event.target);
+
+	postData = {};
+
+    for (var entry of formData.entries()){
+      postData[entry[0]] = entry[1];
+    }
+
+    request.post({
+       url:`http://${api_config.environment}/user/login`,
+       json: postData,
+       
+     },function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+              console.log(body);
+          }
+      }
+	);
+});
+
+
+
+let userSignUpForm = document.getElementById("userSignUpForm");
+userSignUpForm.addEventListener('submit', function(event) {
+	event.preventDefault();
+	const formData = new FormData(event.target);
+
+	postData = {};
+
+    for (var entry of formData.entries()){
+      postData[entry[0]] = entry[1];
+    }
+
+   request.post({
+       url:`http://${api_config.environment}/user/new`,
+       json: postData,
+
+     },function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+              console.log(body);
+          }
+      }
+	);
+});
+
+
+
+let getAllButton = document.getElementById("getAllButton");
+getAllButton.addEventListener('click', function(){
+	// get request
+});
