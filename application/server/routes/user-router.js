@@ -12,13 +12,12 @@ router.get('/all', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-	
+
 
 });
 
 
 router.post('/new', (req, res) => {
-	console.log(req.body.registrationForm);
  
   new User(req.body.registrationForm).save(function(err){
      

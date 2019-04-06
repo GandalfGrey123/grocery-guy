@@ -8,10 +8,6 @@ const userRouter = require('./routes/user-router');
 
 
 const dbUrl = 'mongodb://localhost:27017/grocery-guy';
-mongoose.connect(dbUrl,{ useNewUrlParser: true })
-  .then(() =>  console.log(dbUrl + 'connection succesful!'))
-  .catch((err) => console.error(err));
-
 
 const serverStart = () => {
 	  app.use(bodyParser.urlencoded({
