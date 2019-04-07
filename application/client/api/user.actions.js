@@ -68,5 +68,9 @@ getAllButton.addEventListener('click', function(){
 	// get request
 	request.get({
 		 url:`http://${api_config.environment}/user/all`,
-	});
+     json: true,
+
+	},function (error, response) {
+     console.log(response.body);
+  });
 });

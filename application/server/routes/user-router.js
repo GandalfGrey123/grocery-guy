@@ -3,7 +3,7 @@ const router = express.Router();
 var User = require('../models/user');
 
 router.get('/all', (req, res) => {
-  User.find({}).exec(function( err, users){
+  User.find({}, 'username name email').select('-_id').exec(function( err, users){
   	if(err){console.log(err);}
   	else{
   	 res.json(users);
