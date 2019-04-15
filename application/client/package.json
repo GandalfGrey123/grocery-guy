@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "electron": "^4.1.4"
+    "ejs-electron": "^2.0.3",
+    "electron": "^4.1.4",
+    "jquery": "^3.4.0"
   },
   "author": "",
   "license": "ISC"
