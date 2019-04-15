@@ -13,8 +13,4 @@
     "url": "https://github.com/GandalfGrey123/grocery-guy/issues"
   },
   "homepage": "https://github.com/GandalfGrey123/grocery-guy#readme",
-  "devDependencies": {
-    "bootstrap": "^4.3.1",
-    "electron": "^4.1.4"
-  }
 }
