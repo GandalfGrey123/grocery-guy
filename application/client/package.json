@@ -10,7 +10,8 @@
     "bootstrap": "^4.3.1",
     "ejs-electron": "^2.0.3",
     "electron": "^4.1.4",
-    "jquery": "^3.4.0"
+    "jquery": "^3.4.0",
+    "open": "^6.1.0"
   },
   "author": "",
   "license": "ISC"
