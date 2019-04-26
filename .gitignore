@@ -1,2 +1,4 @@
 /application/server/node_modules
 /application/client/node_modules
+application/.DS_Store
+.DS_Store
