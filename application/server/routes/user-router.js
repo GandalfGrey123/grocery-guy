@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 var User = require('../models/user');
 
+var MealTime = require('../models/meal-time');
+
+
 router.get('/register-form-show', (req,res) =>{
   res.render('index.html.ejs');
 });
@@ -51,8 +54,5 @@ router.post('/login', (req, res) => {
      }
   });
 });
-
-
-
 
 module.exports = router;
