@@ -14,7 +14,7 @@ userLoginForm.addEventListener('submit', function(event) {
     }
 
     request.post({
-       url:`http://${api_config.registration-url}`,
+       url:`http://${api_config.environment}/user/login`,
        json: postData,
        
      },function (error, response, body) {
