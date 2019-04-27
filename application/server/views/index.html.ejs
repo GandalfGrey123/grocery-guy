@@ -19,7 +19,7 @@
          <div class="col align-self-start">
          </div>
 
-        <form action="./register-form-submit" method="POST" class="col-lg-8 col-sm-10 align-self-center bg-light p-5 border">
+        <form action="/user/register" method="POST" class="col-lg-8 col-sm-10 align-self-center bg-light p-5 border">
           <h2>Register </h2>
           <br><br>
 
@@ -46,7 +46,7 @@
             </div>
 
           </div>
-      
+            <input type="hidden" name="_csrf" value= "<%= csrfToken %>">
             <button type="submit" class="btn btn-secondary btn-lg btn-block">Register</button>
         </form>
 

@@ -1,32 +1,36 @@
 const express = require('express');
 const router = express.Router();
 var User = require('../models/user');
+const passport = require('passport');
 
-var MealTime = require('../models/meal-time');
+var csurf = require('csurf');
+var csrfProtection = csurf();
 
+router.use(csrfProtection);
 
-router.get('/register-form-show', (req,res) =>{
-  res.render('index.html.ejs');
+router.get('/csrftkn', (req,res)=>{
+   res.send({csrfToken: req.csrfToken()});
 });
 
-router.post('/register-form-submit',(req ,res)=>{
 
-  //validate(req.body)
+//registration and login routes
+router.post('/register',
+    passport.authenticate('signup', {
+      successRedirect: '/user/success',
+      failureRedirect: '/user/register',
+      failureFlash: false,
+    })
+);
 
-  User.create({ 
-    name: req.body.name,
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  },(err, user) => {
-      if(err) return handleError(err);
-      res.status = 204;
-      res.send('succesful!');
-  });
 
-  //want this to work instead, but couldnt get form name to
-  //new User(req.body.registrationForm).save(function(err){  
+router.get('/register', (req,res) =>{
+  res.render('index.html.ejs',{csrfToken: req.csrfToken()});
 });
+
+router.get('/success', (req,res) =>{
+  res.render('success.html.ejs');
+});
+
 
 router.post('/login', (req, res) => {
 

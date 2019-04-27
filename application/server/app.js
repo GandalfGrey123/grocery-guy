@@ -1,10 +1,13 @@
+const process = require('process');
 const express = require('express');
 const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+require('./config/passport')
 
-var pjson = require('./package.json');
 const userRouter = require('./routes/user-router');
-const models = require('./models/user')
+var pjson = require('./package.json');
 
 var app = express();
 
@@ -24,9 +27,22 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());    
+
+app.use(session({
+	secret: '###10101010###', 
+	resave: false , 
+	saveUninitialized: false
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/user', userRouter);
+
 
 app.listen(5000, '127.0.0.1', () => {
     console.log('the ' + pjson.name + ' server is listening on 127.0.0.1:5000');
 });
+
+
 
