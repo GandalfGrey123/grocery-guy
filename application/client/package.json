@@ -7,6 +7,7 @@
     "start": "electron ."
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "ejs-electron": "^2.0.3",
     "electron": "^4.1.4",
