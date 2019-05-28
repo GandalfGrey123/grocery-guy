@@ -6,30 +6,15 @@
     <title>Homepage</title>
   </head>
 
-  <body>
-       <% if( true == false) { %>
-           <% include ../partials/main %>    
-       <% } else{ %>
-           <% include ../partials/login-box %>  
-       <%} %>
-   
+  <body>       
+       <% include ../partials/login-box %>       
        <nav class="navbar fixed-bottom navbar-light bg-faded justify-content-end">
          <a class="navbar-brand " href="#"> Grocery Guy 
             <small>version 1.0</small>
          </a>
        </nav>
   </body>  
-
-   <script>
-      require('../../api/newcrsf.js');
-    </script>
-
-   <% if( true == false) { %>
-        <script>require('../../api/user.actions.js');</script>
-   <% } else{ %>
-        <script>require('../../api/login.actions.js');</script>
-        <script>require('../../api/register-redirect.js');</script>
-   <%} %> 
-    
-   
+  
+   <script>require('../../api/login.actions.js');</script>
+   <script>require('../../api/register-redirect.js');</script>
 </html>
