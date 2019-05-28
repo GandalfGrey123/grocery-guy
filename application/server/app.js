@@ -3,8 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 const session = require('express-session');
-const passport = require('passport');
-require('./config/passport')
 
 const userRouter = require('./routes/user-router');
 var pjson = require('./package.json');
@@ -22,6 +20,8 @@ mongoose.connect( dbUrl,{
    
 app.set(`view engine`, `ejs`);
 
+app.use(express.static(__dirname + '/views'));
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -33,9 +33,6 @@ app.use(session({
 	resave: false , 
 	saveUninitialized: false
 }))
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use('/user', userRouter);
 
