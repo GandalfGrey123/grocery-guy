@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 var User = require('../models/user');
 
+const { generateSessionToken }= require('../utils/users')
+
 var csurf = require('csurf');
 var csrfProtection = csurf();
 router.use(csrfProtection);
-
 
 //registration and login routes
 router.get('/register', (req,res) =>{
@@ -34,8 +35,7 @@ router.post('/register', (req,res) =>{
        });
     } 
  });
-})
-
+});
 
 
 //registration success view 
@@ -57,7 +57,11 @@ router.post('/login', (req, res) => {
           if(isMatch == true){  
 
           //need to return oAuth token and client will save it in localstorage          
-            res.status(200).send('success');
+            let userSessionToken = generateSessionToken()
+            user.set('sessionToken', userSessionToken);          
+            user.save().then(() => res.status(200)
+                .json({ token: userSessionToken}));
+            
           }else {
            res.status(400).json({error: 'failed'});
           }
