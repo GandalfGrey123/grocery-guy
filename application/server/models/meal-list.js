@@ -13,8 +13,7 @@ var MealListSchema = new Schema({
 	}],
 
 	mealHour: {
-		type: Schema.Types.ObjectId,
-		ref: 'MealTime',
+		type: String,
 		required: true
 	}	
 });

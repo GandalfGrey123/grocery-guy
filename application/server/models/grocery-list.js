@@ -13,4 +13,3 @@ var GroceryListSchema = new Schema({
 });
 
 module.exports = mongoose.model('GroceryList', GroceryListSchema);
-
