@@ -40,6 +40,3 @@ app.use('/user', userRouter);
 app.listen(5000, '127.0.0.1', () => {
     console.log('the ' + pjson.name + ' server is listening on 127.0.0.1:5000');
 });
-
-
-

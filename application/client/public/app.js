@@ -9,11 +9,11 @@ const isDev = require('electron-is-dev');
 
 let win;
 
-function createWindow() {
+function createWindow(){
   win = new BrowserWindow({width: 900, height: 680, webPreferences: { webSecurity: false}});
   win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   win.on('closed', () => win = null);
-}
+};
 
 app.on('ready', createWindow);
 
