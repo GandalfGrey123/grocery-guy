@@ -1,6 +1,11 @@
 # Grocery-guy
 grocery list electron app 
 
+how to run in dev environment
+npm install
+npm run electron-dev
+
+
 
 dev environment workflow
 
