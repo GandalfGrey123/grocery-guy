@@ -1,7 +1,7 @@
 const config = () => {
   let environment = {
     'env': 'localhost:5000',
-    //'registration': '/userd/register',
+    'registration': '/userw/register',
     'login': '/userd/login',
     'mainViewInitialize': '/init',
   };

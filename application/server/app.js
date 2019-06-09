@@ -1,15 +1,16 @@
-const process = require('process');
+var pjson = require('./package.json');
 const express = require('express');
-const mongoose = require('mongoose');
+var app = express();
+
 var bodyParser = require('body-parser');
 const session = require('express-session');
 
-const userRouter = require('./routes/user-router');
-var pjson = require('./package.json');
+const userWebRouter = require('./routes/web-user-router');
+const userDesktopRouter = require('./routes/desktop-user-router');
 
-var app = express();
-
+const mongoose = require('mongoose');
 const dbUrl = 'mongodb://localhost:27017/grocery-guy';
+
 mongoose.connect( dbUrl,{ 
 	  useNewUrlParser: true,
 	  useFindAndModify: false,
@@ -34,7 +35,8 @@ app.use(session({
 	saveUninitialized: false
 }))
 
-app.use('/user', userRouter);
+app.use('/userd', userDesktopRouter);
+app.use('/userw', userWebRouter);
 
 
 app.listen(5000, '127.0.0.1', () => {
