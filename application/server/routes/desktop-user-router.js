@@ -15,17 +15,17 @@ router.post('/login', (req, res) => {
      
      if(user){      
         user.comparePassword(req.body.password, function(err, isMatch) {
-          console.log(isMatch);
-          if(isMatch == true){  
 
-          //need to return oAuth token and client will save it in localstorage          
-            let userSessionToken = generateSessionToken()
+          if(isMatch == true){  
+            
+           //need to return oAuth token and client will save it in localstorage          
+            let userSessionToken = generateSessionToken(15,user.id)
             user.set('sessionToken', userSessionToken);          
             user.save().then(() => res.status(200)
                 .json({ token: userSessionToken}));
             
           }else {
-           res.status(400).json({error: 'failed'});
+           res.status(404).json({token: null});
           }
         });
      }

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var MealTime = require('../models/meal-time');
+var User = require('../models/user');
 
 const dbUrl = 'mongodb://localhost:27017/grocery-guy';
 mongoose.connect(dbUrl,{
@@ -9,34 +9,22 @@ mongoose.connect(dbUrl,{
   .then(() =>  console.log(dbUrl + 'seeder connection succesful!'))
   .catch((err) => console.error(err));
 
-MealTime.create({ 
-	mealHour: 'BREAKFAST' 
+// User.create({ 
+// 	 email: 'req.body.email',
+//    username: 'req.body.username',
+//    name: 'req.body.name',                        
+//    password: 'req.body.password',
 
-}, function (err) {
-  if (err) return handleError(err);
-  console.log('breakfast meal time created' );
-});
+// }, function (err) {
+//   if (err) return handleError(err);
+//   console.log('created' );
+// });
 
-MealTime.create({ 
-	mealHour: 'LUNCH' 
 
-}, function (err) {
-  if (err) return handleError(err);
-  console.log('lunch meal time created' );
-});
 
-MealTime.create({ 
-	mealHour: 'DINNER' 
+  User.findOne({ email: 'req.body.email' },function(err, user){
+      console.log(user.username)
 
-}, function (err) {
-  if (err) return handleError(err);
-  console.log('dinner meal time created' );
-});
+  });
 
-MealTime.create({ 
-	mealHour: 'SNACK' 
 
-}, function (err) {
-  if (err) return handleError(err);
-  console.log('snack meal time created' );
-});
