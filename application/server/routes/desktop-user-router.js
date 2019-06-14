@@ -2,11 +2,34 @@ const express = require('express');
 const router = express.Router();
 var User = require('../models/user');
 
-const { generateSessionToken }= require('../utils/users')
+const { generateSessionToken } = require('../utils/users')
+
+router.get('/authUser', (req, res) => {
+  User.findOne({ 
+    email: req.headers.sessionemail
+  },function(err, user){
+    if(err){
+      console.log(err);
+      return;
+     }
+
+     if(user){
+       res.status(200).json({isValid: req.headers.sessiontoken == user.sessionToken});
+     }
+
+     else{
+       res.status(401).json({error: 'failed'});
+     }
+  });
+ 
+});
 
 router.post('/login', (req, res) => {
 
-  User.findOne({ email: req.body.email },function(err, user){
+  User.findOne({ 
+    email: req.body.email 
+
+  },function(err, user){
      
      if(err){
       console.log(err);
@@ -30,7 +53,6 @@ router.post('/login', (req, res) => {
         });
      }
      else{
-      console.log("user not found");
       res.status(401).json({error: 'failed'});
      }
   });
