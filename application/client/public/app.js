@@ -7,8 +7,11 @@ const isDev = require('electron-is-dev');
 
 let win;
 
+//web session alternative
+//local session storage for user data
 global.userLocalStorage ={
-  authToken: 'fucker'
+  authToken: null,
+  userEmail: null
 };
 
 function createWindow(){
@@ -18,12 +21,8 @@ function createWindow(){
   win.on('closed', () => win = null);
 };
 
-app.on('ready', createWindow);
 
-// ipcMain.on("storeAuthToken", (event, newToken) => {
-//   console.log(newToken);
-//   global.userLocalStorage = newToken;
-// });
+app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

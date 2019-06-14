@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
 	Form, Button, Navbar,
-	Container, Row, Col, Alert, Tooltip, OverlayTrigger
+	Container, Row, Col, Alert,
 } from 'react-bootstrap';
 
 import './styles/LoginPage.css'
-import { userLogin, redirectRegistration } from '../../api/user.actions';
+import { userLogin, openRegistrationWindow, validateSession,} from '../../api/user.actions';
 
 class LoginPage extends Component {
 
@@ -26,18 +26,20 @@ class LoginPage extends Component {
 	 }
 
 	 handleFormSubmit = () =>{
-	   userLogin(this.state.loginForm, (data) =>{
+	   userLogin(this.state.loginForm, (data) =>{	   	
 	   	this.setState({
-	   	 message: { open: false, description: '' } 
+	   	   message: { open: false, description: '' },
+	   	   loginSuccess: true
 	   	});
 
 	   },(errorStatus) => {
-	   	if(errorStatus == 401){
+	   	if(errorStatus === 401){
 	   	 this.setState({
-	   	 	message: { open: true, description: 'Invalid Email or Password' } 
+	   	 	message: { open: true, description: 'Invalid Email or Password' },
+	   	 	loginSuccess: false
 	   	 });
 	   	}
-	   	alert('your login failed!');
+	   	alert('Insolent User! You Have Failed To Login!');
 	   })
 	 };
 
@@ -126,7 +128,7 @@ class LoginPage extends Component {
 							   variant="success"
 							   type="submit"
 							   block
-							   onClick = {redirectRegistration}
+							   onClick = {openRegistrationWindow}
 							  >
 							   Register
                				 </Button>

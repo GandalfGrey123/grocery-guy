@@ -1,35 +1,41 @@
 import axios from "axios";
 import api_config from './config/api.config';
 
-const {shell} = window.require('electron');
-const {remote} = window.require( "electron" );
+import {
+    storeUserEmail,
+    storeToken,getToken,getEmail,
+    openBrowserURL
+} from '../electron-util/storage';
 
 
-//turn these three electron functions into utility folder
-export const storeToken = (tok) => { 
-  remote.getGlobal('userLocalStorage').authToken = tok
+export const validateSession = () =>{
+  axios({
+    method: 'get',
+    url: `http://${api_config.env+api_config.auth}`,      
+    headers:{
+     'sessiontoken': getToken(),
+     'sessionemail': getEmail()
+    } 
+  }).then((res) =>{
+    console.log(res.data.isValid == true);
+  });
 }
 
-export const getToken = () => {
-  return remote.getGlobal('userLocalStorage').authToken
+export const openRegistrationWindow = ()=>{
+  openBrowserURL(`http://${api_config.env+api_config.registration}`);
 }
-
-
-export const redirectRegistration = () => {
-    shell.openExternal(`http://${api_config.env+api_config.registration}`); 
-};
-
 
 export const userLogin = ( credentials , respondToUser, onError = () =>{})=>{
-
-    axios({
-        method: 'post',
-        url: `http://${api_config.env+api_config.login}`,
-        data: credentials,
-    }).then((res) =>{ 
-       storeToken(res.data.token)   	
-       respondToUser(res.status);
-    }).catch((error) =>{
-    	onError(error.response.status)
-    })
+  axios({
+     method: 'post',
+     url: `http://${api_config.env+api_config.login}`,
+     data: credentials,
+  }).then((res) =>{ 
+    
+     storeToken(res.data.token)   	
+     storeUserEmail(credentials.email)
+     respondToUser(res.status);
+  }).catch((error) =>{
+  	 onError(error.response.status)
+  });
 }; 

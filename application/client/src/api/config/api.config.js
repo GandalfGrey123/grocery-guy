@@ -3,7 +3,7 @@ const config = () => {
     'env': 'localhost:5000',
     'registration': '/userw/register',
     'login': '/userd/login',
-    'mainViewInitialize': '/init',
+    'auth':'/userd/authUser',
   };
  return environment;
 };
