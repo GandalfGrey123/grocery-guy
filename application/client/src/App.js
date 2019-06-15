@@ -11,16 +11,10 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-        <Switch>
-        
-        // all i need to do is make an loginSuccess state var in login component
-        // then in login api call callback , redirect to homepage
-        // last inside homepage have a authRequired state var checked when component mounts
-        // check that by grabing it from session storage
-
-          <Route path={'/Home'} component={HomePage} />
-          <Route path={'/'} component={LoginPage} />
-        </Switch>
+         <Switch>        
+           <Route path={'/Home'} component={HomePage} />
+           <Route path={'/'} component={LoginPage} />
+         </Switch>
         </BrowserRouter>
       </div>
     );
