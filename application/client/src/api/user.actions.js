@@ -7,31 +7,29 @@ import {
     openBrowserURL
 } from '../electron-util/storage';
 
-
-export const validateSession = () =>{
+export const authSession = (respondToUser) =>{
   axios({
     method: 'get',
-    url: `http://${api_config.env+api_config.auth}`,      
+    url: `http://${api_config.env + api_config.auth}`,      
     headers:{
      'sessiontoken': getToken(),
      'sessionemail': getEmail()
     } 
   }).then((res) =>{
-    console.log(res.data.isValid == true);
+    respondToUser(res.data.isValid);
   });
 }
 
 export const openRegistrationWindow = ()=>{
-  openBrowserURL(`http://${api_config.env+api_config.registration}`);
+  openBrowserURL(`http://${api_config.env + api_config.registration}`);
 }
 
 export const userLogin = ( credentials , respondToUser, onError = () =>{})=>{
   axios({
      method: 'post',
-     url: `http://${api_config.env+api_config.login}`,
+     url: `http://${api_config.env + api_config.login}`,
      data: credentials,
-  }).then((res) =>{ 
-    
+  }).then((res) =>{     
      storeToken(res.data.token)   	
      storeUserEmail(credentials.email)
      respondToUser(res.status);
