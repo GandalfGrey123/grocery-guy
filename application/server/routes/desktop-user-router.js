@@ -18,7 +18,7 @@ router.get('/authUser', (req, res) => {
      }
 
      else{
-       res.status(401).json({error: 'failed'});
+       res.status(200).json({isValid: false});
      }
   });
  
