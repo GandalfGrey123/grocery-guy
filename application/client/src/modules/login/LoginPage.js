@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 import {
-	Form, Button, Navbar,
+	Form, Button, Navbar, 
 	Container, Row, Col, Alert,
 } from 'react-bootstrap';
 
 import './styles/LoginPage.css'
-import { userLogin, openRegistrationWindow, validateSession,} from '../../api/user.actions';
+import { userLogin, openRegistrationWindow } from '../../api/user.actions';
 
 class LoginPage extends Component {
 
@@ -60,16 +61,19 @@ class LoginPage extends Component {
      };
 
 	render() {
-		const { loginForm , message} = this.state;
+		const { loginForm , message, loginSuccess} = this.state;
+
+		if(loginSuccess){
+			return <Redirect to={'/Home'} />
+		}
+
 		return (
 		  <div>
 				<Navbar className="p-3" expand="lg" variant="light" bg="light">
 					<Navbar.Brand href="#home">Gocery Guy version 1.0</Navbar.Brand>
 				</Navbar>
 
-
 				<Container className="mainContent"> 
-
 				{	
 					message.open &&
 					<Row className="justify-content-md-center">
@@ -85,10 +89,9 @@ class LoginPage extends Component {
         			</Row>
 				 }
 				
-
 					<Row className="justify-content-md-center">
+						
 						<Col></Col>
-
 						<Col md={6} xs={7}>
 							<Form className="mb-4">
 							  <Form.Group controlId="formBasicEmail">
@@ -122,7 +125,7 @@ class LoginPage extends Component {
 							   onClick={this.handleFormSubmit.bind(this)}
 							 >
 							   Submit
-              				 </Button>
+               </Button>
 
 							 <Button
 							   variant="success"
@@ -131,12 +134,11 @@ class LoginPage extends Component {
 							   onClick = {openRegistrationWindow}
 							  >
 							   Register
-               				 </Button>
-
-							
+               	</Button>
+						
 						</Col>		
-			
 						<Col></Col>
+
 					</Row>
 				</Container>
 
