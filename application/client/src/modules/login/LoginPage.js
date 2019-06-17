@@ -69,9 +69,7 @@ class LoginPage extends Component {
 
 		return (
 		  <div>
-				<Navbar className="p-3" expand="lg" variant="light" bg="light">
-					<Navbar.Brand href="#home">Gocery Guy version 1.0</Navbar.Brand>
-				</Navbar>
+
 
 				<Container className="mainContent"> 
 				{	
