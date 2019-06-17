@@ -1,9 +1,5 @@
-// var mongoose = require('mongoose');
-// var bcrypt = require('bcrypt');
-
-import { Schema, model } from 'mongoose';
-import { genSalt, hash as _hash, compare } from 'bcrypt';
-
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var UserSchema = new mongoose.Schema({
   email: {type: String, required: true, index:{ unique: true }},  

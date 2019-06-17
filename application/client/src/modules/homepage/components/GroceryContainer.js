@@ -68,7 +68,7 @@ class GroceryContainer extends Component {
                  eventKey="list-view"
                  onClick={ (e) =>{ this.changeViewFormat('list') }}
                >
-                <i class="fa fa-th-list" /> list 
+                <i className="fa fa-th-list" /> list 
                </Nav.Link>
              </Nav.Item>
 
@@ -77,7 +77,7 @@ class GroceryContainer extends Component {
                   eventKey="grid-view"
                   onClick={ (e) =>{ this.changeViewFormat('grid') }}
                >
-               <i class="fa fa-th" /> grid
+               <i className="fa fa-th" /> grid
                </Nav.Link>
              </Nav.Item>
            </Nav>

@@ -5,9 +5,9 @@ import GroceryContainer from './components/GroceryContainer';
 import MealContainer from './components/MealContainer';
 
 import {
-	Nav, Button, ButtonGroup, Dropdown,
-	Form, FormControl,
-	Container, Row, Col
+	Button, ButtonGroup, Dropdown,
+	FormControl,
+	Row, Col
 } from 'react-bootstrap';
 
 import { authSession } from '../../api/user.actions';
@@ -68,15 +68,15 @@ class HomePage extends Component {
 	}
 
 	authUser() {
-		authSession((isValid) => {
-			this.setState({
-				authorized: isValid,
-			});
-		});
+	 authSession((isValid) => {
+	 	this.setState({
+	 		authorized: isValid,
+	 	});
+	 });
 	}
 
 	componentDidMount() {
-		//this.authUser()
+	  this.authUser()
 	}
 
 
@@ -96,15 +96,15 @@ class HomePage extends Component {
 							<ButtonGroup >
 								<Button
 									variant="secondary"
-									active={ this.state.containerType == 'meal' ? true : false}								
+									active={ this.state.containerType === 'meal' ? true : false}								
 									onClick={(e) => this.changeContainer("grocery")}
 								>
 									Grocery
 								</Button>
-															
+
 								<Button
 									variant="secondary"	
-									active={ this.state.containerType == 'grocery' ? true : false}									
+									active={ this.state.containerType === 'grocery' ? true : false}									
 									onClick={(e) => this.changeContainer("meal")}
 								>
 									Meal

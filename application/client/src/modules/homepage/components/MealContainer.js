@@ -7,6 +7,9 @@ class MealContainer extends Component {
 
 	constructor(props){
       super(props);       
+      this.state={
+      	mealType:'all',
+      }
 	 }
 
 	render(){
