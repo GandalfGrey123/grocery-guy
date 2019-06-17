@@ -1,15 +1,11 @@
-var mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
 
 var GroceryListSchema = new Schema({
-	name: {
-		type: String, 
-		required:true
-	},	
-	items:{ 
-		type: Array, 
-		default: []
-	}
+	items: [{
+		type: Schema.Types.ObjectId,
+		ref: 'GroceryItem' 
+   }],
 });
 
-module.exports = mongoose.model('GroceryList', GroceryListSchema);
+export default model('GroceryList', GroceryListSchema);

@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
 
 var MealListSchema = new Schema({
 	mealName: {
@@ -15,7 +15,7 @@ var MealListSchema = new Schema({
 	mealHour: {
 		type: String,
 		required: true
-	}	
+	}
 });
 
-module.exports = mongoose.model(`MealList`, MealListSchema);
+export default model(`MealList`, MealListSchema);

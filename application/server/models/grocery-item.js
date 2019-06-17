@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
 
 var GroceryItemSchema = new Schema({
 	name: {
@@ -12,4 +12,4 @@ var GroceryItemSchema = new Schema({
 	}
 });
 
-module.exports = mongoose.model('GroceryItem', GroceryItemSchema);
+export default model('GroceryItem', GroceryItemSchema);
