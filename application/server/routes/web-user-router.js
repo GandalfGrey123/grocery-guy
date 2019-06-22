@@ -13,26 +13,26 @@ router.get('/register', (req,res) =>{
 });
 
 router.post('/register', (req,res) =>{  
- User.findOne( { $or :
+ User.findOne({ $or :
     [{'email': req.body.email} , 
-    {'username':req.body.username}]}, 
- 
- (err, user)=>{
+    {'username':req.body.username}]
+ },(err, user)=>{
   
     if(err) res.status(400).json({error: 'failed'});
     
-     if(!user){
-      User.create({ 
-         email: req.body.email,
-         username: req.body.username,
-         name: req.body.name,                        
-         password: req.body.password,
-       },(err, user) => {
-            if(err) res.status(500).json({error: 'failed'});              
-            res.status(200).render('success.html.ejs');
-       });
+    if(!user){
+     User.create({ 
+        email: req.body.email,
+        username: req.body.username,
+        name: req.body.name,                        
+        password: req.body.password,
+      },(err, user) => {
+          if(err) res.status(500).json({error: 'failed'});              
+          res.status(200).render('success.html.ejs',{ email: user.email , username: user.username} );
+      });
     } 
  });
+
 });
 
 

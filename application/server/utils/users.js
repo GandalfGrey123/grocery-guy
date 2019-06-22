@@ -1,3 +1,4 @@
+var User = require('../models/user');
 
 //change to use something else besides id later
 const generateSessionToken = (length,id) => {
@@ -6,4 +7,4 @@ const generateSessionToken = (length,id) => {
   );
 }
 
-module.exports={ generateSessionToken }
+module.exports={generateSessionToken}

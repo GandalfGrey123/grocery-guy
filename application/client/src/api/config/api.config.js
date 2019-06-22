@@ -3,7 +3,10 @@ const config = () => {
     'env': 'localhost:5000',
     'registration': '/userw/register',
     'login': '/userd/login',
-    'mainViewInitialize': '/init',
+    'auth':'/userd/authUser',
+    'newGrocery': '/grocery/new',
+    'allLists': '/grocery/all',
+    'addItemsGroceryList': '/grocery/items/add',
   };
  return environment;
 };

@@ -1,14 +1,25 @@
 var mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-var GroceryItemSchema = new Schema({
+var GroceryItemSchema = new mongoose.Schema({
 	name: {
-		type: String, 
-		required:true
+	  type: String, 
+	  required:true
+	},
+	
+	quantity:{
+	  type: Number, 
+	  required:false,
+	  default: 1,
+	},
+
+	store:{
+	  type: String,
+	  required:false	
 	},
 	description:{
-		type: String,
-		required:false
+	  type: String,
+	  required:false
 	}
 });
 
