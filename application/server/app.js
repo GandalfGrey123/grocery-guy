@@ -7,6 +7,7 @@ const session = require('express-session');
 
 const userWebRouter = require('./routes/web-user-router');
 const userDesktopRouter = require('./routes/desktop-user-router');
+const groceryRouter = require('./routes/grocery-router');
 
 const mongoose = require('mongoose');
 const dbUrl = 'mongodb://localhost:27017/grocery-guy';
@@ -37,6 +38,7 @@ app.use(session({
 
 app.use('/userd', userDesktopRouter);
 app.use('/userw', userWebRouter);
+app.use('/grocery',groceryRouter);
 
 
 app.listen(5000, '127.0.0.1', () => {
