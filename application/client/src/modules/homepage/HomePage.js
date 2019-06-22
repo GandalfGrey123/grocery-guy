@@ -114,7 +114,7 @@ class HomePage extends Component {
 					</Col>
 					<Col  xs={12} sm={4} md={6} lg={6}>
 						
-							<FormControl type="text" placeholder="Search" />							
+					  <FormControl type="text" placeholder="Search" />							
 						
 					</Col>
 

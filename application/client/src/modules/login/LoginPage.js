@@ -123,20 +123,19 @@ class LoginPage extends Component {
 							   onClick={this.handleFormSubmit.bind(this)}
 							 >
 							   Submit
-               </Button>
+               				</Button>
 
-							 <Button
-							   variant="success"
-							   type="submit"
-							   block
-							   onClick = {openRegistrationWindow}
-							  >
-							   Register
-               	</Button>
+							<Button
+							  variant="success"
+							  type="submit"
+							  block
+							  onClick = {openRegistrationWindow}
+							 >
+							  Register
+               				 </Button>
 						
 						</Col>		
 						<Col></Col>
-
 					</Row>
 				</Container>
 

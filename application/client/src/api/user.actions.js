@@ -1,11 +1,13 @@
 import axios from "axios";
 import api_config from './config/api.config';
 
+//get information from local storage about current user
 import {
     storeUserEmail,
     storeToken,getToken,getEmail,
     openBrowserURL
 } from '../electron-util/storage';
+
 
 export const authSession = (respondToUser) =>{
   axios({
@@ -15,8 +17,10 @@ export const authSession = (respondToUser) =>{
      'sessiontoken': getToken(),
      'sessionemail': getEmail()
     } 
-  }).then((res) =>{
+  }).then((res) =>{    
     respondToUser(res.data.isValid);
+  }).catch((error)=>{
+    respondToUser(false);
   });
 }
 
@@ -30,10 +34,12 @@ export const userLogin = ( credentials , respondToUser, onError = () =>{})=>{
      url: `http://${api_config.env + api_config.login}`,
      data: credentials,
   }).then((res) =>{     
+     
      storeToken(res.data.token)   	
      storeUserEmail(credentials.email)
      respondToUser(res.status);
+
   }).catch((error) =>{
-  	 onError(error.response.status)
+  	 onError(error.response)
   });
-}; 
+};

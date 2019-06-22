@@ -1,5 +1,4 @@
 const { shell,remote } = window.require('electron');
-
 const electronStorage = "userLocalStorage"
 
 export const storeUserEmail = (email)=>{
