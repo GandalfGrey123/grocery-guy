@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 var User = require('../models/user');
-
 const { generateSessionToken } = require('../utils/users')
 
 router.get('/authUser', (req, res) => {
@@ -13,12 +12,16 @@ router.get('/authUser', (req, res) => {
       return;
      }
 
-     if(user){
-       res.status(200).json({isValid: req.headers.sessiontoken == user.sessionToken});
+     if(user){ 
+      res.status(200).json({
+        isValid: req.headers.sessiontoken == user.sessionToken
+      }); 
      }
 
-     else{
-       res.status(200).json({isValid: false});
+     else{ 
+      res.status(200).json({
+        isValid: false
+      });
      }
   });
  
@@ -28,7 +31,6 @@ router.post('/login', (req, res) => {
 
   User.findOne({ 
     email: req.body.email 
-
   },function(err, user){
      
      if(err){
@@ -39,8 +41,7 @@ router.post('/login', (req, res) => {
      if(user){      
         user.comparePassword(req.body.password, function(err, isMatch) {
 
-          if(isMatch == true){  
-            
+          if(isMatch == true){        
            //need to return oAuth token and client will save it in localstorage          
             let userSessionToken = generateSessionToken(15,user.id)
             user.set('sessionToken', userSessionToken);          
