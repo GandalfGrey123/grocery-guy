@@ -1,11 +1,38 @@
-import { Schema as _Schema, model } from 'mongoose';
-const Schema = _Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var GroceryListSchema = new Schema({
-	items: [{
-		type: Schema.Types.ObjectId,
-		ref: 'GroceryItem' 
+var GroceryListSchema = new mongoose.Schema({
+   title: {
+	 type: String, 
+	 required:true
+   },
+   
+   items: [{
+	 type: Schema.Types.ObjectId,
+	 ref: 'GroceryItem' 
    }],
+
+   created_at: { 
+   	 type: Date 
+   	},
+
+   updated_at: { 
+     type: Date 
+   },
 });
 
-export default model('GroceryList', GroceryListSchema);
+
+GroceryListSchema.pre('save',function(next) {
+	date = new Date(); 
+	//fix date to time format here
+	//date = fixDateFormat(new Date());
+
+	if(!this.created_at){
+	 this.created_at = date;
+	}
+
+	this.updated_at = date;
+	next();
+});
+
+module.exports = mongoose.model('GroceryList', GroceryListSchema);

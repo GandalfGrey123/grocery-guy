@@ -1,15 +1,26 @@
-import { Schema as _Schema, model } from 'mongoose';
-const Schema = _Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var GroceryItemSchema = new Schema({
+var GroceryItemSchema = new mongoose.Schema({
 	name: {
-		type: String, 
-		required:true
+	  type: String, 
+	  required:true
+	},
+	
+	quantity:{
+	  type: Number, 
+	  required:false,
+	  default: 1,
+	},
+
+	store:{
+	  type: String,
+	  required:false	
 	},
 	description:{
-		type: String,
-		required:false
+	  type: String,
+	  required:false
 	}
 });
 
-export default model('GroceryItem', GroceryItemSchema);
+module.exports = mongoose.model('GroceryItem', GroceryItemSchema);

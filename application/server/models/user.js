@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var Schema = mongoose.Schema;
 
 var UserSchema = new mongoose.Schema({
   email: {type: String, required: true, index:{ unique: true }},  
@@ -7,6 +8,17 @@ var UserSchema = new mongoose.Schema({
   name: String,
   password: {type: String, required: true},
   sessionToken: {type: String, required: false},
+
+  groceryLists:[{
+	  type: Schema.Types.ObjectId,
+	  ref: 'GroceryList', 
+  }],
+
+  mealLists:[{
+	  type: Schema.Types.ObjectId,
+	  ref: 'MealList',
+  }],
+
 },{
   timestamps: true
 });
@@ -34,5 +46,4 @@ UserSchema.methods.comparePassword = function(password, cb) {
     });
 };
  
-
 module.exports = mongoose.model('User', UserSchema);
