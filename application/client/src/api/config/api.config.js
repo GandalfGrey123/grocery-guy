@@ -4,6 +4,9 @@ const config = () => {
     'registration': '/userw/register',
     'login': '/userd/login',
     'auth':'/userd/authUser',
+    'newGrocery': '/grocery/new',
+    'allLists': '/grocery/all',
+    'addItemsGroceryList': '/grocery/items/add',
   };
  return environment;
 };
