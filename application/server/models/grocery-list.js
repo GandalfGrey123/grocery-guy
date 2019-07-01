@@ -1,16 +1,34 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var GroceryListSchema = new mongoose.Schema({
+var GroceryItem = new Schema({
+	name: {
+	  type: String, 
+	  required:true
+	},	
+	quantity:{
+	  type: Number, 
+	  required:false,
+	  default: 1,
+	},
+
+	store:{
+	  type: String,
+	  required:false	
+	},
+	description:{
+	  type: String,
+	  required:false
+	}
+});
+
+var GroceryListSchema = new Schema({
    title: {
 	 type: String, 
 	 required:true
    },
    
-   items: [{
-	 type: Schema.Types.ObjectId,
-	 ref: 'GroceryItem' 
-   }],
+   items: [GroceryItem],
 
    created_at: { 
    	 type: Date 
