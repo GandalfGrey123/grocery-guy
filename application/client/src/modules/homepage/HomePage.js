@@ -79,7 +79,6 @@ class HomePage extends Component {
 	  this.authUser()
 	}
 
-
 	render() {
 		const { authorized } = this.state;
 
