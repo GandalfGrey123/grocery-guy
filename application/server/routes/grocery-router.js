@@ -57,18 +57,14 @@ router.post('/items/add', (req, res) => {
      var list = user.groceryLists.find((nextList) => {  
        return nextList._id == req.body.groceryListId;
      });
+     
+     req.body.items.map((item)=>{
+      list.items.push(item);
+     })
 
-     GroceryItem.insertMany(
-      req.body.items
-     ).then(function(newItems ) {
-
-       //concat the new items to the GroceryList.items
-       newItems.map((item) => { list.items.push(item) })     
-       list.save();
-       user.save();
-   
-       res.status(200).json({ userData: user.groceryLists });
-     }); 
+     list.save();
+     user.save();
+     res.status(200).json({ userData: user.groceryLists });
   })
   
 });
@@ -81,6 +77,7 @@ router.get('/all', (req,res) => {
     path:'groceryLists',
   }).exec((err, user)=>{
     //if(err) do something
+    console.log(user.groceryLists)
      res.status(200).json({ userData: user.groceryLists });
   })
 });
