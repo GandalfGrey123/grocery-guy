@@ -10,7 +10,7 @@ class GroceryContainer extends Component {
 
 	constructor(props){
    super(props);       
-   this.state ={
+    this.state ={
       groceryLists:[],
       viewFormat: 'grid',
       showNewForm: false,
@@ -139,9 +139,14 @@ class GroceryContainer extends Component {
 
               <ListGroup className="drop-shadow">
                 {
-                  this.state.itemListCache.map((item)=>(
+                  listObj.items.map((item)=>(
                     <ListGroup.Item>{item.name} ({item.quantity})</ListGroup.Item>
                   ))
+                }
+                {
+                  this.state.itemListCache.map((item)=>(
+                    <ListGroup.Item>{item.name} ({item.quantity})</ListGroup.Item>
+                  ))                  
                 }
               </ListGroup>
 
@@ -236,7 +241,7 @@ class GroceryContainer extends Component {
                <Card.Body>
                  <Card.Title>{list.title}</Card.Title>
                    <Card.Subtitle className="mb-2 text-muted"> created 06/20/2019 </Card.Subtitle>
-                 <Card.Text>  number of items: 0 </Card.Text>
+                 <Card.Text>  number of items: ({list.items.length}) </Card.Text>
                 </Card.Body>
                </Card>
               </Button>
