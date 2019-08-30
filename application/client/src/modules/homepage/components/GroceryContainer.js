@@ -4,6 +4,8 @@ import {
 	Nav, Button, 
   Table, Card , Modal, Form , ListGroup,
 } from 'react-bootstrap';
+
+import ListView from './ListView';
 import { createGroceryList, getAllUsersLists , addGroceryItems } from '../../../api/grocerylist.actions';
 
 class GroceryContainer extends Component {
@@ -273,37 +275,12 @@ class GroceryContainer extends Component {
         }
 
         else if(this.state.viewFormat === 'list'){
-          
-          for(let i =0; i < this.state.groceryLists.length; i++){
-            listContainers.push(
-              <tr>
-               <td> {this.state.groceryLists[i].title} </td>         
-              </tr>
-            )
-          }
-
-          return(           
-          <Row>
-            <Col sm={4} md={4} lg={4}>
-            <Table hover>
-              <thead>
-                <tr>
-                  <th> Your Lists</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listContainers}  
-              </tbody>
-            </Table>
-            </Col>
-
-            <Col sm={8} md={8} lg={8}>
-              <Card body> 
-                 <h2> List Archive Empty</h2>
-              </Card>             
-            </Col>
-            </Row>
-            );
+        return (
+         <ListView 
+          items = {this.state.groceryLists}
+         />
+        );
+        
         }
      }
 
@@ -338,35 +315,35 @@ class GroceryContainer extends Component {
            </Nav>
 
             <Container  className= "p-4 fill-height" fluid>
-            <Container className="p-4 rounded fill-height drop-shadow" fluid>
-             { this.displayGroceryLists() }
-            </Container>
+               <Container className="p-4 rounded fill-height drop-shadow" fluid>
+                { this.displayGroceryLists() }
+               </Container>
              </Container>
 
             <Container fluid>
-            <Row>
-            <Nav  
-  			      className = "navbar fixed-bottom justify-content-end p-3 bg-light "
-			      >
-
-            <Button 
-              className="btn-outline-primary mr-2" 
-              variant="link" 
-              size="lg"
-             >              
-              + Edit Lists
-            </Button>
-
-  		 	    <Button 
-              className="btn-outline-primary" 
-              variant="link" 
-              onClick={()=>{this.handleShowNew()}}
-              size="lg"
-             >              
-              + New List
-            </Button>
-			      </Nav>
-            </Row>
+              <Row>
+                  <Nav  
+  			            className = "navbar fixed-bottom justify-content-end p-3 bg-light "
+			            >
+      
+                  <Button 
+                    className="btn-outline-primary mr-2" 
+                    variant="link" 
+                    size="lg"
+                   >              
+                    + Edit Lists
+                  </Button>
+      
+  		 	          <Button 
+                    className="btn-outline-primary" 
+                    variant="link" 
+                    onClick={()=>{this.handleShowNew()}}
+                    size="lg"
+                   >              
+                    + New List
+                  </Button>
+			            </Nav>
+              </Row>
             </Container>
 
 
