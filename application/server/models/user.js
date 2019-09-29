@@ -1,49 +1,86 @@
-var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema;
 
-var UserSchema = new mongoose.Schema({
-  email: {type: String, required: true, index:{ unique: true }},  
-  username: {type: String, required: true, index:{ unique: true }}, 
-  name: String,
-  password: {type: String, required: true},
-  sessionToken: {type: String, required: false},
+const { isValidEmail, isValidPassword } = require('../utils/validation/users');
+const NEW_USER_ERRORS = require('../utils/errors/userErrors');
+const SERVER_ERRORS = require('../utils/errors/serverErrors');
 
-  groceryLists:[{
-	  type: Schema.Types.ObjectId,
-	  ref: 'GroceryList', 
-  }],
+const UserSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+        uppercase: true,
+        index: {
+            unique: true
+        }
+    },
+    username: {
+        type: String,
+        required: true,
+        index: {
+            unique: true
+        }
+    },
+    name: String,
+    password: { type: String, required: true },
+    sessionToken: { type: String, required: false },
 
-  mealLists:[{
-	  type: Schema.Types.ObjectId,
-	  ref: 'MealList',
-  }],
+    groceryLists: [{
+        type: Schema.Types.ObjectId,
+        ref: 'GroceryList',
+    }],
 
-},{
-  timestamps: true
+    mealLists: [{
+        type: Schema.Types.ObjectId,
+        ref: 'MealList',
+    }],
+
+}, {
+    timestamps: true
 });
 
-UserSchema.pre('save',function(next) {
-	var user = this;
+UserSchema.pre('save', function(next) {
+    let user = this;
 
-	if(!user.isModified('password')) return next();
+    //case - creating new user
+    if (user.isNew) {
+        if (!isValidEmail(user.email)) {
+            return next(NEW_USER_ERRORS.invalidEmail)
+        }
 
-	bcrypt.genSalt(10,function(err, salt){
-		if(err) return next(err);
+        if (!isValidPassword(user.password)) {
+            return next(NEW_USER_ERRORS.invalidPassword);
+        }
+    }
 
-		bcrypt.hash(user.password,salt,function(err, hash){
-		  if(err) return next(err);
-		  user.password = hash;
-		  next();
-		})
-	});
+
+    //case - check for password (new or updated)
+    if (user.isModified('password')) {
+        bcrypt.genSalt(10, function(err, salt) {
+
+            if (err) {
+              return next(SERVER_ERRORS.passwordSalt);
+            }
+
+            bcrypt.hash(user.password, salt, function(err, hash) {
+                if (err) return next(SERVER_ERRORS.passwordHash);
+                user.password = hash;
+            })
+        });
+    }
+
+  next();
 });
 
+//checks login
 UserSchema.methods.comparePassword = function(password, cb) {
     bcrypt.compare(password, this.password, function(err, isMatch) {
-        if (err) return cb(err);
+        if (err) {
+            return cb(SERVER_ERRORS.generalError);
+        }
         cb(null, isMatch);
     });
 };
- 
+
 module.exports = mongoose.model('User', UserSchema);
