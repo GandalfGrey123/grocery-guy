@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var GroceryItem = new Schema({
+const GroceryItem = new Schema({
 	name: {
 	  type: String, 
 	  required:true
@@ -11,7 +11,6 @@ var GroceryItem = new Schema({
 	  required:false,
 	  default: 1,
 	},
-
 	store:{
 	  type: String,
 	  required:false	
@@ -22,7 +21,7 @@ var GroceryItem = new Schema({
 	}
 });
 
-var GroceryListSchema = new Schema({
+const GroceryListSchema = new Schema({
    title: {
 	 type: String, 
 	 required:true
@@ -38,7 +37,6 @@ var GroceryListSchema = new Schema({
      type: Date 
    },
 });
-
 
 GroceryListSchema.pre('save',function(next) {
 	date = new Date(); 
